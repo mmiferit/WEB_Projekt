@@ -9,7 +9,7 @@
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: #343a40">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="/index.html">Fitness trgovina</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,13 +25,13 @@
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button type="button" class="btn btn-outline-success my-5 my-sm-0" data-toggle="modal" data-target="#loginModal" >Log in</button>  
+            <button type="button" class="btn btn-outline-success my-5 my-sm-0" data-toggle="modal" data-target="#RegisterModal" type="submit">Register</button>
           </form>
         </div>
       </nav>
 
-  <div class="jumbotron">
+ <!-- <div class="jumbotron">
     <h1 class="display-4">Dobro došli</h1>
     <p class="lead">Kupujte fitness suplemente jeftino i sigurno.</p>
     <hr class="my-4">
@@ -42,20 +42,47 @@
       </button>
       <a class="btn btn-primary btn-lg ml-3" href="pages/products.html" role="button">Pregledajte oglase</a>
     </p>
-  </div>
+  </div>-->
 
+<!--CAROUSEL-->
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <!-- <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 class="display-4">Dobro došli</h1>
+    <p class="lead">Kupujte fitness suplemente jeftino i sigurno.</p>
+    <hr class="my-4">
+    <p class="lead">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newProductModal"
+        onclick="">
+        Kreirajte oglas
+      </button>
+      <a class="btn btn-primary btn-lg ml-3" href="pages/products.html" role="button">Pregledajte oglase</a>
+    </p>
+        </div>
+        
         <img class="d-block w-100" src="/img/slides/1.jpg" alt="First slide">
         
       </div>
       <div class="carousel-item">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 class="display-4">Najbolja fitness trgovina</h1>
+         <!-- <h1 class="display-4">Dobro došli</h1>
+    <p class="lead">Kupujte fitness suplemente jeftino i sigurno.</p>
+    <hr class="my-4">
+    <p class="lead">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newProductModal"
+        onclick="">
+        Kreirajte oglas
+      </button>
+      <a class="btn btn-primary btn-lg ml-3" href="pages/products.html" role="button">Pregledajte oglase</a>
+    </p>-->
+  </div>-->
         <img class="d-block w-100" src="/img/slides/2.jpg" alt="Second slide">
       </div>
     </div>
@@ -122,4 +149,65 @@
   </script>
 </body>
 
+
+<!--LOGIN-->
+<div class="modal fade" role="dialog" id="loginModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Log in </h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+        <div class="modal-body">
+          <div class="form-group">
+          <input type="text" name="username" class="form-control" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <input type="password" name="Password" class="form-control" placeholder="Password">
+        </div>
+      </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign in</button>
+        </div>
+    </div>
+  </div>
+
+</div>
+<!--REGISTER-->
+<div class="modal fade" role="dialog" id="RegisterModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Register</h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+        <div class="modal-body">
+          <div class="form-group">
+          <input type="text" name="name" class="form-control" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <input type="text" name="surname" class="form-control" placeholder="Surname">
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" class="form-control" placeholder="E-mail">
+        </div>
+        <div class="form-group">
+          <input type="number" name="telephone" class="form-control" placeholder="Telephone">
+        </div>
+        
+        <div class="form-group">
+          <input type="password" name="Password" class="form-control" placeholder="Password">
+        </div>
+        
+      </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Register</button>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+
 </html>
+
