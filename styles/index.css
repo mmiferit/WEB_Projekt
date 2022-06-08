@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap');
 
 body {
-    height: 100%; 
+    height: 100%;
     overflow: hidden;
     font-family: 'Sora', sans-serif;
-    background-color: #6E6E6E;
+    background-color: #1F3044;
 }
 
-.carousel {
+#carousel {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -18,7 +18,7 @@ body {
     font-family: 'Sora', sans-serif;
     font-size: 4.7vw;
     font-weight: 800;
-    color: #FAF0DC;
+    color: #FB9039;
 }
 
 .navbar {
