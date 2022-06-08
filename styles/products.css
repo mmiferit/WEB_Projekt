@@ -14,15 +14,18 @@ body {
     width: 100%;
 }
 
-p {
+.container p {
     font-weight: 400;
     color: #FB9039;
 }
 
-h1,
-h4 {
+h1 {
     font-weight: 800;
     color: #FB9039;
+}
+h4 {
+    font-weight: 800;
+    color: #1F3044;
 }
 
 .col {
@@ -30,6 +33,12 @@ h4 {
     margin-right: auto;
     width: 33%;
     background-color: #646C79;
+}
+.col img{
+    width: 200px;
+    height: 200px;
+    display:block;
+    margin:auto;
 }
 
 .row .col {

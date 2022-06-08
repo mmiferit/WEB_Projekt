@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
+import{getDatabase,ref,set,onValue}from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA624LlFogz1fHBFnEkUd5MSS8T33X4ekI",
@@ -20,7 +21,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-
+const database = getDatabase();
 // Login
 document.getElementById('btn_login').addEventListener('click', () => {
   var email = document.getElementById('login_email').value;
@@ -50,6 +51,9 @@ document.getElementById('btn_register').addEventListener('click', () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
+          writeUserData(user.uid, email, name, surname, phoneNumber);
+          alert("Registracija uspješna.")
+          $('#register_modal').modal('hide');
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -60,3 +64,13 @@ document.getElementById('btn_register').addEventListener('click', () => {
   } else
     alert("Neka od polja su prazna")
 })
+
+function writeUserData(userId, email, name, surname, phoneNumber) {
+  const db = getDatabase();
+  set(ref(db, 'users/' + userId), {
+    email: email,
+    name: name,
+    surname : surname,
+    phoneNumber : phoneNumber
+  });
+}
