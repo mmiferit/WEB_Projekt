@@ -20,13 +20,18 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav ml-2">
         <li class="nav-item">
           <a class="nav-link" href="pages/products.html">Proizvodi</a>
         </li>
       </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="add_product">Dodaj oglas</a>
+        </li>
+      </ul>
       <form class="form-inline mt-2 mr-3">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login_modal">Prijavite
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login_modal" id="btn_main_login">Prijavite
           se</button>
       </form>
 
@@ -37,19 +42,19 @@
   <div id="carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner text-center">
       <div class="carousel-item active">
-        <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
+        <div class="carousel-caption d-flex mb-5 align-items-center justify-content-center">
           <p>Velika ponuda fitness opreme, dodataka prehrani i sprava za vježbanje.<br>
             Pogledaj i naruči online!
-            <a class="btn btn-outline-primary btn-lg" href="pages/products.html" role="button">Pregledajte oglase</a>
+            <a class="btn btn-primary btn-lg" href="pages/products.html" role="button">Pregledajte oglase</a>
           </p>
         </div>
         <img class="d-block w-100" src="/img/slides/1.jpg" alt="First slide">
       </div>
       <div class="carousel-item">
-        <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
+        <div class="carousel-caption d-flex mb-5 align-items-center justify-content-center">
           <p>Velika ponuda fitness opreme, dodataka prehrani i sprava za vježbanje.<br>
             Pogledaj i naruči online!
-            <a class="btn btn-outline-primary btn-lg ml-3" href="pages/products.html" role="button">Pregledajte
+            <a class="btn btn-primary btn-lg ml-3" href="pages/products.html" role="button">Pregledajte
               oglase</a>
           </p>
         </div>

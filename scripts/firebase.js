@@ -6,7 +6,12 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
-import{getDatabase,ref,set,onValue}from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+import {
+  getDatabase,
+  ref,
+  set,
+  onValue
+} from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA624LlFogz1fHBFnEkUd5MSS8T33X4ekI",
@@ -22,6 +27,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
+
+
+
+const btn = document.getElementById("btn_main_login")
+if(auth.currentUser!=null){
+  btn.innerText="Odjava"
+}
 // Login
 document.getElementById('btn_login').addEventListener('click', () => {
   var email = document.getElementById('login_email').value;
@@ -66,11 +78,20 @@ document.getElementById('btn_register').addEventListener('click', () => {
 })
 
 function writeUserData(userId, email, name, surname, phoneNumber) {
-  const db = getDatabase();
-  set(ref(db, 'users/' + userId), {
+  set(ref(database, 'users/' + userId), {
     email: email,
     name: name,
-    surname : surname,
-    phoneNumber : phoneNumber
+    surname: surname,
+    phoneNumber: phoneNumber
   });
 }
+
+
+document.getElementById('add_product').addEventListener('click', () => {
+  if(auth.currentUser!=null){
+    $('#new_product_modal').modal('show');
+  }
+  else{
+    $('#login_modal').modal('show');
+  }
+})
