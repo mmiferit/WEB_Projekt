@@ -23,6 +23,7 @@ h1 {
     font-weight: 800;
     color: #FB9039;
 }
+
 h4 {
     font-weight: 800;
     color: #1F3044;
@@ -34,11 +35,12 @@ h4 {
     width: 33%;
     background-color: #646C79;
 }
-.col img{
+
+.col img {
     width: 200px;
     height: 200px;
-    display:block;
-    margin:auto;
+    display: block;
+    margin: auto;
 }
 
 .row .col {
