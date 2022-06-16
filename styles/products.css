@@ -1,9 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap');
 
+:root {
+    --background-color-primary: #1D2228;
+    --text-color-primary: #E1E2E2;
+    --text-color-secondary: #FB8122;
+    --card-background-color: #2d353f;
+}
+
 body {
     height: 100%;
     font-family: 'Sora', sans-serif;
-    background-color: #1F3044;
+    background-color: var(--background-color-primary);
 }
 
 .navbar {
@@ -16,24 +23,24 @@ body {
 
 .container p {
     font-weight: 400;
-    color: #FB9039;
+    color: var(--text-color-primary);
 }
 
 h1 {
     font-weight: 800;
-    color: #FB9039;
+    color: var(--text-color-primary);
 }
 
 h4 {
     font-weight: 800;
-    color: #1F3044;
+    color: var(--text-color-secondary);
 }
 
 .col {
     margin-left: auto;
     margin-right: auto;
     width: 33%;
-    background-color: #646C79;
+    background-color: var(--card-background-color);
 }
 
 .col img {

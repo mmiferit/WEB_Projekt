@@ -1,24 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap');
 
+:root {
+    --background-color-primary: #1D2228;
+    --text-color-primary: #E1E2E2;
+    --text-color-secondary: #FB8122;
+    --card-background-color: #2d353f;
+}
+
 body {
     height: 100%;
     overflow: hidden;
     font-family: 'Sora', sans-serif;
-    background-color: #1F3044;
+    background-color: var(--background-color-primary);
 }
 
 #carousel {
     position: relative;
     z-index: 1;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: block;
 }
 
 .carousel p {
     font-size: 4.7vw;
     font-weight: 800;
-    color: #FB9039;
+    color: var(--text-color-secondary);
 }
 
 .navbar {
@@ -27,7 +34,6 @@ body {
     position: absolute;
     top: 20px;
     z-index: 2;
-    background: transparent;
     width: 100%;
 }
 
@@ -35,4 +41,18 @@ body {
     object-fit: cover;
     filter: blur(6px);
     -webkit-filter: blur(6px);
+}
+
+@media screen and (max-width: 800px) {
+    .carousel p {
+        margin-top: 50px;
+        font-size: 3.7vh;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    .carousel p {
+        font-size: 6vh;
+        font-weight: 800;
+    }
 }
