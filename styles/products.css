@@ -58,10 +58,10 @@ h4 {
 
 @media screen and (max-width: 800px) {
     .card-body a {
-        font-size: 1.5vh;
+        font-size: 0.8vh;
     }
 
     .card-body h4 {
-        font-size: 2.0vh;
+        font-size: 1.8vh;
     }
 }
