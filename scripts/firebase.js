@@ -11,6 +11,7 @@ import {
   getDatabase,
   ref,
   set,
+  push,
   onValue
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
 
@@ -45,7 +46,7 @@ window.onload = function () {
     } else {
       btn.innerText = "Prijavite se"
       btn.classList.remove("btn-outline-danger");
-      btn.classList.add("btn-primary");
+      btn.classList.add("btn-outline-primary");
       btn.setAttribute('data-toggle', 'modal');
       btn.setAttribute('data-target', '#login_modal');
       btn.addEventListener('click', () => {})
@@ -98,12 +99,26 @@ document.getElementById('btn_register').addEventListener('click', () => {
 })
 
 //Show new product modal on click
-document.getElementById('add_product').addEventListener('click', () => {
+document.getElementById('btn_add_product').addEventListener('click', () => {
   if (auth.currentUser != null) {
     $('#new_product_modal').modal('show');
   } else {
     $('#login_modal').modal('show');
   }
+})
+
+document.getElementById('btn_publish').addEventListener('click', () => {
+
+  var title = document.getElementById('product_title').value;
+  var description = document.getElementById('product_description').value;
+  var price = document.getElementById('product_price').value;
+  var category = document.getElementById('product_category').value;
+  var imageURLs = "";
+  if (title && description && price && category) {
+    writeProductData(auth.currentUser.uid, title, description, price, category, imageURLs)
+    clearInputs();
+  } else
+    alert("Neka od polja su prazna")
 })
 
 //Write user data to Firebase after registering
@@ -113,6 +128,19 @@ function writeUserData(userId, email, name, surname, phoneNumber) {
     name: name,
     surname: surname,
     phoneNumber: phoneNumber
+  });
+}
+
+function writeProductData(userId, title, description, price, category, imageURLs) {
+  var productsRef = ref(database, 'users/' + userId + '/products/');
+  var newProductKey = push(productsRef).key;
+
+  set(ref(database, 'users/' + userId + '/products/' + newProductKey), {
+    title: title,
+    description: description,
+    price: price,
+    category: category,
+    imageURLs: imageURLs
   });
 }
 
@@ -126,4 +154,8 @@ function clearInputs() {
   document.getElementById('register_name').value = "";
   document.getElementById('register_surname').value = "";
   document.getElementById('register_phone').value = "";
+  document.getElementById('product_title').value = "";
+  document.getElementById('product_description').value = "";
+  document.getElementById('product_price').value = "";
+  document.getElementById('product_category').value = "Ostalo";
 }
