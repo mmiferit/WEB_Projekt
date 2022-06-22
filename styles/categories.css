@@ -3,7 +3,7 @@
 :root {
     --background-color-primary: #1D2228;
     --text-color-primary: #E1E2E2;
-    --text-color-secondary: #FB8122;
+    --text-color-secondary: #FFC300;
     --card-background-color: #2d353f;
 }
 
@@ -29,7 +29,7 @@ body {
 h1 {
     text-align: center;
     font-weight: 800;
-    color: var(--text-color-primary);
+    color: var(--text-color-secondary);
 }
 
 h4 {
