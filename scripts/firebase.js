@@ -51,7 +51,8 @@ window.onload = function () {
       var a = document.createElement('a');
       a.classList.add('nav-link');
       a.setAttribute('href', '#');
-      a.setAttribute('id', 'btn_manage_products');
+      a.setAttribute('data-toggle', 'modal');
+      a.setAttribute('data-target', '#manageProductsModal');
       a.innerHTML = "Moji oglasi";
       userProducts.appendChild(a);
       navbar.prepend(userProducts);
@@ -124,12 +125,6 @@ document.getElementById('btn_publish').addEventListener('click', () => {
     clearInputs();
   } else
     alert("Neka od polja su prazna")
-})
-
-document.getElementById('btn_manage_products').addEventListener('click', () => {
-
-  //TODO
-  
 })
 
 //Write user data to Firebase after registering
