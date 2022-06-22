@@ -32,7 +32,8 @@ const database = getDatabase();
 
 //Check user auth on page load, show appropriate button for signing in and out.
 window.onload = function () {
-  const btn = document.getElementById("btn_main_login")
+  var btn = document.getElementById("btn_main_login");
+  var navbar = document.getElementById("navbarItems");
   auth.onAuthStateChanged(function (user) {
     if (user) {
       btn.innerText = "Odjava"
@@ -42,7 +43,18 @@ window.onload = function () {
       btn.setAttribute('data-target', '');
       btn.addEventListener('click', () => {
         auth.signOut();
+        location.reload();
       })
+
+      var userProducts = document.createElement('li');
+      userProducts.classList.add('nav-item');
+      var a = document.createElement('a');
+      a.classList.add('nav-link');
+      a.setAttribute('href', '#');
+      a.setAttribute('id', 'btn_manage_products');
+      a.innerHTML = "Moji oglasi";
+      userProducts.appendChild(a);
+      navbar.prepend(userProducts);
     } else {
       btn.innerText = "Prijavite se"
       btn.classList.remove("btn-outline-danger");
