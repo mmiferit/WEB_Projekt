@@ -55,13 +55,6 @@ window.onload = function () {
       a.innerHTML = "Moji oglasi";
       userProducts.appendChild(a);
       navbar.prepend(userProducts);
-    } else {
-      btn.innerText = "Prijavite se"
-      btn.classList.remove("btn-outline-danger");
-      btn.classList.add("btn-outline-primary");
-      btn.setAttribute('data-toggle', 'modal');
-      btn.setAttribute('data-target', '#login_modal');
-      btn.addEventListener('click', () => {})
     }
   });
 }
@@ -131,6 +124,12 @@ document.getElementById('btn_publish').addEventListener('click', () => {
     clearInputs();
   } else
     alert("Neka od polja su prazna")
+})
+
+document.getElementById('btn_manage_products').addEventListener('click', () => {
+
+  //TODO
+  
 })
 
 //Write user data to Firebase after registering
