@@ -15,6 +15,14 @@ import {
   onValue
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
 
+import {
+  getStorage,
+  ref as refStorage,
+  uploadBytes,
+  getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/9.8.2/firebase-storage.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyA624LlFogz1fHBFnEkUd5MSS8T33X4ekI",
   authDomain: "web-projekt-a5087.firebaseapp.com",
@@ -29,6 +37,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
+const storage = getStorage();
 
 //Check user auth on page load, show appropriate button for signing in and out.
 window.onload = function () {
@@ -119,9 +128,9 @@ document.getElementById('btn_publish').addEventListener('click', () => {
   var description = document.getElementById('product_description').value;
   var price = document.getElementById('product_price').value;
   var category = document.getElementById('product_category').value;
-  var imageURLs = "";
   if (title && description && price && category) {
-    writeProductData(auth.currentUser.uid, title, description, price, category, imageURLs)
+
+    writeProductData(auth.currentUser.uid, title, description, price, category)
     clearInputs();
   } else
     alert("Neka od polja su prazna")
@@ -137,18 +146,44 @@ function writeUserData(userId, email, name, surname, phoneNumber) {
   });
 }
 
-function writeProductData(userId, title, description, price, category, imageURLs) {
+
+var image;
+document.getElementById("files").addEventListener("change", function (e) {
+  image = e.target.files;
+});
+
+
+function writeProductData(userId, title, description, price, category) {
+
   var productsRef = ref(database, 'users/' + userId + '/products/');
   var newProductKey = push(productsRef).key;
+  var imageURL = "";
 
-  set(ref(database, 'users/' + userId + '/products/' + newProductKey), {
+  if (image) {
+    var storageRef = refStorage(storage, newProductKey);
+    uploadBytes(storageRef, image).then((snapshot) => console.log("Uploaded"));
+
+    getDownloadURL(storageRef)
+      .then((url) => {
+        imageURL = url;
+        console.log(imageURL);
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+  }
+
+
+  set(ref(database, 'products/' + newProductKey), {
     title: title,
     description: description,
     price: price,
     category: category,
-    imageURLs: imageURLs
+    imageURL: imageURL,
+    userID: userId
   });
 }
+
 
 //Clear inputs after signing in or registering
 function clearInputs() {

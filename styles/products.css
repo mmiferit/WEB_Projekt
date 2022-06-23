@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap');
+
+:root {
+    --background-color-primary: #1D2228;
+    --text-color-primary: #E1E2E2;
+    --text-color-secondary: #FFC300;
+    --card-background-color: #2d353f;
+}
+
+body {
+    height: 100%;
+    font-family: 'Sora', sans-serif;
+    background-color: var(--background-color-primary);
+}
+
+.card {
+    width: 18rem;
+    background-color: #2d353f;
+
+}
+.card-body h5  {
+   color: #E1E2E2;
+}
+
+ .navbar {
+    font-size: 20px;
+    font-weight: 600;
+    top: 20px;
+    background: transparent;
+    width: 100%;
+}
+ 
+.container p {
+    font-weight: 400;
+    color: var(--text-color-primary);
+}
+
+h1 {
+    text-align: center;
+    font-weight: 800;
+    color: var(--text-color-secondary);
+}
+
+h4 {
+    font-weight: 800;
+    color: var(--text-color-secondary);
+}
+
+.product {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--card-background-color);
+}
+
+.row .product {
+    padding: 10px 10px 10px 10px;
+}
