@@ -1,6 +1,7 @@
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+
 import {
     getDatabase,
     ref,
@@ -40,7 +41,6 @@ window.onload = function () {
                     var productID = child.key;
                     var category = child.child('category').val();
                     var description = child.child('description').val();
-
                     var imageURL = child.child('imageURL').val();
                     if (imageURL == "")
                         imageURL = "../img/no-image.jpg";
@@ -108,11 +108,8 @@ window.onload = function () {
                 }
             }
         });
-
         if (!check) {
-            var h1 = document.createElement('h1');
-            h1.innerHTML = "Trenutno nema proizvoda u traženoj kategoriji."
-            products.appendChild(h1);
+            document.getElementById('categoryHeading').innerHTML = "Trenutno nema proizvoda u traženoj kategoriji."
         }
     });
 }

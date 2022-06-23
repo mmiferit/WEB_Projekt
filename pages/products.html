@@ -13,23 +13,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent mb-5" id="navbar">
-    <div class="container">
-      <a class="navbar-brand mr-auto" href="../index.html">Fitness trgovina</a>
-    </div>
-  </nav>
-
-  <div class="container">
-    <h1 id="categoryHeading">
-
-    </h1>
-    <div class="row" id="products">
-
-    </div>
-  </div>
-
-
-  <!--ModalDetails-->
+  <!--Details modal-->
   <div class="modal fade" id="details_modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -40,27 +24,20 @@
         <div class="modal-body">
           <div class="row mt-2 p-2">
             <img src="" width="100%" class="rounded" id="details_img">
-
           </div>
           <div class="row">
             <div class="container">
               <h5 class="text-muted mb-2 mt-2" id="details_category">
                 </h2>
-
                 <div class="row">
-
                   <div class="container">
                     <textarea class="form-control mb-2" disabled id="details_description" rows="5"></textarea>
-
                   </div>
                 </div>
-
                 <div class="row">
-
                   <div class="container">
                     <h5 class="text-muted mb-2" id="details_price">
                       </h4>
-
                   </div>
                 </div>
             </div>
@@ -69,9 +46,7 @@
       </div>
     </div>
   </div>
-
-
-  <!--ModalLogin-->
+  <!--Login modal-->
   <div class="modal fade" role="dialog" id="login_modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -97,7 +72,6 @@
       </div>
     </div>
   </div>
-
   <!--Register modal-->
   <div class="modal fade" role="dialog" id="register_modal">
     <div class="modal-dialog">
@@ -132,7 +106,16 @@
       </div>
     </div>
   </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent mb-5" id="navbar">
+    <div class="container">
+      <a class="navbar-brand mr-auto" href="../index.html">Fitness trgovina</a>
+    </div>
+  </nav>
 
+  <div class="container">
+    <h1 id="categoryHeading"></h1>
+    <div class="row" id="products"></div>
+  </div>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
   </script>

@@ -57,7 +57,6 @@ window.onload = function () {
         auth.signOut();
         location.reload();
       })
-
       var userProducts = document.createElement('li');
       userProducts.classList.add('nav-item');
       var a = document.createElement('a');
@@ -155,9 +154,7 @@ document.getElementById("files").addEventListener("change", function (e) {
   }
 });
 
-
 function loadUserProducts() {
-
   var listingsModal = document.getElementById('userListings');
   listingsModal.innerHTML = "";
   var check = false;
@@ -214,13 +211,11 @@ function writeProductData(userId, title, description, price, category) {
 
   var productsRef = ref(database, 'users/' + userId + '/products/');
   var newProductKey = push(productsRef).key;
-
   if (files.length != 0) {
     for (let i = 0; i < files.length; i++) {
       var storageRef = refStorage(storage, newProductKey + files[i].name);
-      uploadBytes(storageRef, files[i]).then((snapshot) => {
+      uploadBytes(storageRef, files[i]).then(() => {
         getDownloadURL(storageRef).then((downloadURL) => {
-
           set(ref(database, 'products/' + newProductKey), {
             title: title,
             description: description,
@@ -229,7 +224,6 @@ function writeProductData(userId, title, description, price, category) {
             imageURL: downloadURL,
             userID: userId
           });
-
           loadUserProducts()
         })
       });
@@ -243,7 +237,6 @@ function writeProductData(userId, title, description, price, category) {
       imageURL: "",
       userID: userId
     });
-
     loadUserProducts()
   }
 }
