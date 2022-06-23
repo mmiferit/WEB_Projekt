@@ -13,7 +13,8 @@ import {
   set,
   push,
   get,
-  child
+  child,
+  remove
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
 
 import {
@@ -154,15 +155,19 @@ document.getElementById("files").addEventListener("change", function (e) {
   }
 });
 
+
 function loadUserProducts() {
-  const dbRef = ref(database);
-  get(child(dbRef, `products/`)).then((snapshot) => {
+
+  var listingsModal = document.getElementById('userListings');
+  listingsModal.innerHTML = "";
+  var check = false;
+  get(child(ref(database), `products/`)).then((snapshot) => {
     snapshot.forEach(function (child) {
       if (snapshot.exists()) {
         var userID = child.child('userID').val();
         var productID = child.key
         if (auth.currentUser.uid == userID) {
-          var listingsModal = document.getElementById('userListings');
+          check = true;
           var formGroup = document.createElement('div');
           formGroup.classList.add('form-group');
           formGroup.classList.add('row');
@@ -170,11 +175,39 @@ function loadUserProducts() {
           label.setAttribute('for', productID);
           label.classList.add('col-sm-2');
           label.classList.add('col-form-label');
+          label.innerHTML = child.child('title').val()
+
+          var btnDiv = document.createElement('div');
+          btnDiv.classList.add('col-sm-10');
+
+          var deleteListingBtn = document.createElement('input');
+          deleteListingBtn.setAttribute('type', 'button');
+          deleteListingBtn.classList.add('btn');
+          deleteListingBtn.classList.add('btn-danger');
+          deleteListingBtn.classList.add('mb-3');
+          deleteListingBtn.value = "Obriši oglas"
+
+          deleteListingBtn.addEventListener('click', () => {
+            remove(ref(database, 'products/' + productID));
+            alert('Oglas uspješno izbrisan.');
+            loadUserProducts();
+          })
+
+          btnDiv.appendChild(deleteListingBtn);
+
+          formGroup.appendChild(label);
+          formGroup.appendChild(btnDiv);
+
+          listingsModal.appendChild(formGroup);
         }
       }
     });
+    if (!check) {
+      var p = document.createElement('p');
+      p.innerHTML = "Nemate objavljenih oglasa."
+      listingsModal.appendChild(p);
+    }
   });
-
 }
 
 function writeProductData(userId, title, description, price, category) {
@@ -196,6 +229,8 @@ function writeProductData(userId, title, description, price, category) {
             imageURL: downloadURL,
             userID: userId
           });
+
+          loadUserProducts()
         })
       });
     }
@@ -208,11 +243,10 @@ function writeProductData(userId, title, description, price, category) {
       imageURL: "",
       userID: userId
     });
+
+    loadUserProducts()
   }
-
-
 }
-
 
 //Clear inputs after signing in or registering
 function clearInputs() {

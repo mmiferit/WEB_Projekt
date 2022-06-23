@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap');
 
+
 :root {
     --background-color-primary: #1D2228;
     --text-color-primary: #E1E2E2;
@@ -14,22 +15,18 @@ body {
 }
 
 .card {
-    width: 18rem;
-    background-color: #2d353f;
-
-}
-.card-body h5  {
-   color: #E1E2E2;
+    width: 20rem;
+    text-align: center;
 }
 
- .navbar {
+.navbar {
     font-size: 20px;
     font-weight: 600;
     top: 20px;
     background: transparent;
     width: 100%;
 }
- 
+
 .container p {
     font-weight: 400;
     color: var(--text-color-primary);

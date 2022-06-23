@@ -91,7 +91,8 @@
             autocomplete="off" />
           <textarea class="form-control mt-2" id="product_description" rows="3" placeholder="Kratki opis"></textarea>
 
-          <input class="form-control mt-2" placeholder="Cijena (kn)" type="text" id="product_price" autocomplete="off" />
+          <input class="form-control mt-2" placeholder="Cijena (kn)" type="number" id="product_price"
+            autocomplete="off" />
           <h5 class="mt-3">Odabir kategorije</h5>
           <select class="form-control" id="product_category">
             <option>Ostalo</option>
@@ -122,12 +123,12 @@
           <h3 class="modal-title">Moji oglasi</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <div class="modal-body">
-          <!--TODO-->
-        </div>
+        <div class="modal-body" id="userListings">
+
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <!--Navbar-->
@@ -178,7 +179,7 @@
                     svakodnevnoj
                     prehrani, a
                     to je važno za sve tvoje fitness ciljeve.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Proteini" class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
@@ -192,7 +193,7 @@
                     tvome fitness
                     putovanju.
                     Pogledaj naše najbolje suplemente za upravljanje težinom.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Gaineri" class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
@@ -206,7 +207,8 @@
                     pojavljuju u
                     proteinima, i
                     tvore gradivni blokovi novog mišića - što je važno bez obzira na tvoje ciljeve.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Aminokiseline"
+                    class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
@@ -226,7 +228,7 @@
                     mnoge važne
                     funkcije u
                     tijelu pa je stoga bitno da uneseš preporučenu dnevnu dozu kako bi ostao fit i zdrav.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Vitamini" class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
@@ -240,7 +242,7 @@
                     za koji je
                     znanstveno
                     dokazano da povećava fizički performans u uzastopnim vježbama.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Kreatini" class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
@@ -254,7 +256,8 @@
                     treninga trebala
                     bi imati
                     visoki prioritet.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Pre Workout"
+                    class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
@@ -274,7 +277,7 @@
                     fitness nalaze se u
                     ovoj
                     kategoriji. Opremite svoj dom ili teretanu sa vrhunskim proizvodima iz naše ponude.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Oprema" class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
@@ -288,7 +291,7 @@
                     ugljikohidratima i
                     mastima.
                     Ovdje ćemo se bazirati na ishrani za dobivanje mišićne mase.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Prehrana" class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
@@ -298,7 +301,7 @@
                 <div class="card-body d-flex flex-column">
                   <h4 class="card-title text-center">Ostalo</h4>
                   <p class="card-text">Ostali suplementi i oprema.</p>
-                  <a href="#" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                  <a href="/pages/products.html?filter=Ostalo" class="btn btn-outline-primary mt-auto">Pregledaj</a>
                 </div>
               </div>
             </div>
