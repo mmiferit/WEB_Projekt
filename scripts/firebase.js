@@ -12,7 +12,8 @@ import {
   ref,
   set,
   push,
-  onValue
+  get,
+  child
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
 
 import {
@@ -45,6 +46,7 @@ window.onload = function () {
   var navbar = document.getElementById("navbarItems");
   auth.onAuthStateChanged(function (user) {
     if (user) {
+      loadUserProducts();
       btn.innerText = "Odjava"
       btn.classList.remove("btn-primary");
       btn.classList.add("btn-outline-danger");
@@ -123,13 +125,11 @@ document.getElementById('btn_add_product').addEventListener('click', () => {
 })
 
 document.getElementById('btn_publish').addEventListener('click', () => {
-
   var title = document.getElementById('product_title').value;
   var description = document.getElementById('product_description').value;
   var price = document.getElementById('product_price').value;
   var category = document.getElementById('product_category').value;
   if (title && description && price && category) {
-
     writeProductData(auth.currentUser.uid, title, description, price, category)
     clearInputs();
   } else
@@ -146,42 +146,71 @@ function writeUserData(userId, email, name, surname, phoneNumber) {
   });
 }
 
-
-var image;
+var files = [];
 document.getElementById("files").addEventListener("change", function (e) {
-  image = e.target.files;
+  files = e.target.files;
+  for (let i = 0; i < files.length; i++) {
+    console.log(files[i]);
+  }
 });
 
+function loadUserProducts() {
+  const dbRef = ref(database);
+  get(child(dbRef, `products/`)).then((snapshot) => {
+    snapshot.forEach(function (child) {
+      if (snapshot.exists()) {
+        var userID = child.child('userID').val();
+        var productID = child.key
+        if (auth.currentUser.uid == userID) {
+          var listingsModal = document.getElementById('userListings');
+          var formGroup = document.createElement('div');
+          formGroup.classList.add('form-group');
+          formGroup.classList.add('row');
+          var label = document.createElement('label');
+          label.setAttribute('for', productID);
+          label.classList.add('col-sm-2');
+          label.classList.add('col-form-label');
+        }
+      }
+    });
+  });
+
+}
 
 function writeProductData(userId, title, description, price, category) {
 
   var productsRef = ref(database, 'users/' + userId + '/products/');
   var newProductKey = push(productsRef).key;
-  var imageURL = "";
 
-  if (image) {
-    var storageRef = refStorage(storage, newProductKey);
-    uploadBytes(storageRef, image).then((snapshot) => console.log("Uploaded"));
+  if (files.length != 0) {
+    for (let i = 0; i < files.length; i++) {
+      var storageRef = refStorage(storage, newProductKey + files[i].name);
+      uploadBytes(storageRef, files[i]).then((snapshot) => {
+        getDownloadURL(storageRef).then((downloadURL) => {
 
-    getDownloadURL(storageRef)
-      .then((url) => {
-        imageURL = url;
-        console.log(imageURL);
-      })
-      .catch((error) => {
-        // Handle any errors
+          set(ref(database, 'products/' + newProductKey), {
+            title: title,
+            description: description,
+            price: price,
+            category: category,
+            imageURL: downloadURL,
+            userID: userId
+          });
+        })
       });
+    }
+  } else {
+    set(ref(database, 'products/' + newProductKey), {
+      title: title,
+      description: description,
+      price: price,
+      category: category,
+      imageURL: "",
+      userID: userId
+    });
   }
 
 
-  set(ref(database, 'products/' + newProductKey), {
-    title: title,
-    description: description,
-    price: price,
-    category: category,
-    imageURL: imageURL,
-    userID: userId
-  });
 }
 
 
@@ -199,4 +228,5 @@ function clearInputs() {
   document.getElementById('product_description').value = "";
   document.getElementById('product_price').value = "";
   document.getElementById('product_category').value = "Ostalo";
+  document.getElementById('files').value = "";
 }

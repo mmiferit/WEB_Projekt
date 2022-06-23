@@ -14,6 +14,122 @@
 
 <body>
 
+  <!--Modals-->
+  <!--Login modal-->
+  <div class="modal fade" role="dialog" id="login_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Prijava</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" id="login_email" class="form-control" placeholder="E-mail">
+          </div>
+          <div class="form-group">
+            <input type="password" id="login_password" class="form-control" placeholder="Lozinka">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-success mr-auto" id="btn_login">Prijava</button>
+          <p>
+            Nemate račun? <a class="link-primary" data-toggle="modal" data-target="#register_modal" type="submit"
+              class="close" data-dismiss="modal">Registrirajte se</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Register modal-->
+  <div class="modal fade" role="dialog" id="register_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Registracija</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" id="register_name" class="form-control" placeholder="Ime">
+          </div>
+          <div class="form-group">
+            <input type="text" id="register_surname" class="form-control" placeholder="Prezime">
+          </div>
+          <div class="form-group">
+            <input type="email" id="register_email" class="form-control" placeholder="E-mail">
+          </div>
+          <div class="form-group">
+            <input type="number" id="register_phone" class="form-control" placeholder="Broj mobitela">
+          </div>
+          <div class="form-group">
+            <input type="password" id="register_password" class="form-control" placeholder="Lozinka">
+          </div>
+          <div class="form-group">
+            <input type="password" id="register_password_confirm" class="form-control" placeholder="Ponovite lozinku">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="btn_register" class="btn btn-outline-success my-2 my-sm-0">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--New product modal-->
+  <div class="modal fade" id="new_product_modal" tabindex="-1" aria-labelledby="new_product_modal_label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="new_product_modal_label">Novi oglas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input class="form-control mt-2" placeholder="Naslov oglasa" type="text" id="product_title"
+            autocomplete="off" />
+          <textarea class="form-control mt-2" id="product_description" rows="3" placeholder="Kratki opis"></textarea>
+
+          <input class="form-control mt-2" placeholder="Cijena (kn)" type="text" id="product_price" autocomplete="off" />
+          <h5 class="mt-3">Odabir kategorije</h5>
+          <select class="form-control" id="product_category">
+            <option>Ostalo</option>
+            <option>Proteini</option>
+            <option>Gaineri</option>
+            <option>Aminokiseline</option>
+            <option>Vitamini</option>
+            <option>Kreatini</option>
+            <option>Pre workout</option>
+            <option>Oprema</option>
+            <option>Prehrana</option>
+          </select>
+          <h5 class="mt-3">Odabir fotografija</h5>
+          <input type="file" class="form-control-file" id="files" accept="image/jpeg, image/png">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="btn_publish">Predajte
+            oglas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Product managment modal-->
+  <div class="modal fade" role="dialog" id="manageProductsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Moji oglasi</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!--TODO-->
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent mb-5" id="navbar">
     <div class="container">
@@ -23,12 +139,12 @@
       </button>
       <a class="navbar-brand mr-auto" href="../index.html">Fitness trgovina</a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto ml-2">
+        <ul class="navbar-nav mr-auto ml-2" id="navbarItems">
           <li class="nav-item active">
             <a class="nav-link" href="#">Kategorije</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" id="add_product">Dodajte oglas</a>
+            <a class="nav-link" href="#" id="btn_add_product">Dodajte oglas</a>
           </li>
         </ul>
         <form class="form-inline ml-auto">
@@ -199,68 +315,7 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
-  <!--Login modal-->
-  <div class="modal fade" role="dialog" id="login_modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title">Prijava</h3>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <input type="text" id="login_email" class="form-control" placeholder="E-mail">
-          </div>
-          <div class="form-group">
-            <input type="password" id="login_password" class="form-control" placeholder="Lozinka">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-outline-success mr-auto" id="btn_login">Prijava</button>
-          <p>
-            Nemate račun? <a class="link-primary" data-toggle="modal" data-target="#register_modal" type="submit"
-              class="close" data-dismiss="modal">Registrirajte se</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--Register modal-->
-  <div class="modal fade" role="dialog" id="register_modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title">Registracija</h3>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <input type="text" id="register_name" class="form-control" placeholder="Ime">
-          </div>
-          <div class="form-group">
-            <input type="text" id="register_surname" class="form-control" placeholder="Prezime">
-          </div>
-          <div class="form-group">
-            <input type="email" id="register_email" class="form-control" placeholder="E-mail">
-          </div>
-          <div class="form-group">
-            <input type="number" id="register_phone" class="form-control" placeholder="Broj mobitela">
-          </div>
-          <div class="form-group">
-            <input type="password" id="register_password" class="form-control" placeholder="Lozinka">
-          </div>
-          <div class="form-group">
-            <input type="password" id="register_password_confirm" class="form-control" placeholder="Ponovite lozinku">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" id="btn_register" class="btn btn-outline-success my-2 my-sm-0">Register</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <script type="module" src="../scripts/firebase.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
   </script>

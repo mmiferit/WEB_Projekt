@@ -8,13 +8,6 @@ import {
     child
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
 
-import {
-    getStorage,
-    ref as refStorage,
-    uploadBytes
-}
-from "https://www.gstatic.com/firebasejs/9.8.2/firebase-storage.js";
-
 const firebaseConfig = {
     apiKey: "AIzaSyA624LlFogz1fHBFnEkUd5MSS8T33X4ekI",
     authDomain: "web-projekt-a5087.firebaseapp.com",
@@ -28,17 +21,17 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
-const storage = getStorage();
 
 window.onload = function () {
     const dbRef = ref(database);
     get(child(dbRef, `products/`)).then((snapshot) => {
         snapshot.forEach(function (child) {
-            if (snapshot.exists()) {
+            if (snapshot.exists() ) {
                 console.log(snapshot);
+                var productID = child.key;
                 var category = child.child('category').val();
                 var description = child.child('description').val();
-                var imageURLs = child.child('imageURLs').val();
+                var imageURL = child.child('imageURL').val();
                 var price = child.child('price').val();
                 var title = child.child('title').val();
                 var userID = child.child('userId').val();
@@ -56,7 +49,7 @@ window.onload = function () {
                 card.classList.add('product');
 
                 var img = document.createElement('img');
-                img.setAttribute('src', 'https://www.computerhope.com/jargon/s/scale.jpg');
+                img.setAttribute('src', imageURL);
                 img.classList.add('card-img-top');
                 img.classList.add('rounded');
                 img.classList.add('img-fluid');
@@ -80,6 +73,7 @@ window.onload = function () {
                 btnDetails.classList.add('mt-auto');
                 btnDetails.setAttribute('data-toggle', 'modal');
                 btnDetails.setAttribute('data-target', '#modalId');
+                btnDetails.setAttribute('id', productID);
                 btnDetails.innerHTML = "Detalji"
 
 
