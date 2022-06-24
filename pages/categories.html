@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="author" content="MMI">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styles/categories.css">
+  <title>Kategorije</title>
+</head>
+
+<body>
+  <!--Modals-->
+  <!--Login modal-->
+  <div class="modal fade" role="dialog" id="login_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Prijava</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" id="login_email" class="form-control" placeholder="E-mail">
+          </div>
+          <div class="form-group">
+            <input type="password" id="login_password" class="form-control" placeholder="Lozinka">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-success mr-auto" id="btn_login">Prijava</button>
+          <p>
+            Nemate račun? <a class="link-primary" data-toggle="modal" data-target="#register_modal" type="submit"
+              class="close" data-dismiss="modal">Registrirajte se</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Register modal-->
+  <div class="modal fade" role="dialog" id="register_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Registracija</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" id="register_name" class="form-control" placeholder="Ime">
+          </div>
+          <div class="form-group">
+            <input type="text" id="register_surname" class="form-control" placeholder="Prezime">
+          </div>
+          <div class="form-group">
+            <input type="email" id="register_email" class="form-control" placeholder="E-mail">
+          </div>
+          <div class="form-group">
+            <input type="number" id="register_phone" class="form-control" placeholder="Broj mobitela">
+          </div>
+          <div class="form-group">
+            <input type="password" id="register_password" class="form-control" placeholder="Lozinka">
+          </div>
+          <div class="form-group">
+            <input type="password" id="register_password_confirm" class="form-control" placeholder="Ponovite lozinku">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="btn_register" class="btn btn-outline-success my-2 my-sm-0">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--New product modal-->
+  <div class="modal fade" id="new_product_modal" tabindex="-1" aria-labelledby="new_product_modal_label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="new_product_modal_label">Novi oglas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input class="form-control mt-2" placeholder="Naslov oglasa" type="text" id="product_title"
+            autocomplete="off" />
+          <textarea class="form-control mt-2" id="product_description" rows="3" placeholder="Kratki opis"></textarea>
+          <input class="form-control mt-2" placeholder="Cijena (kn)" type="number" id="product_price"
+            autocomplete="off" />
+          <h5 class="mt-3">Odabir kategorije</h5>
+          <select class="form-control" id="product_category">
+            <option>Ostalo</option>
+            <option>Proteini</option>
+            <option>Gaineri</option>
+            <option>Aminokiseline</option>
+            <option>Vitamini</option>
+            <option>Kreatini</option>
+            <option>Pre workout</option>
+            <option>Oprema</option>
+            <option>Prehrana</option>
+          </select>
+          <h5 class="mt-3">Odabir fotografije</h5>
+          <input type="file" class="form-control-file" id="files" accept="image/jpeg, image/png">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-dismiss="modal" id="btn_publish">Predajte
+            oglas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Product managment modal-->
+  <div class="modal fade" role="dialog" id="manageProductsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Moji oglasi</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" id="userListings"></div>
+      </div>
+    </div>
+  </div>
+
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent mb-5" id="navbar">
+    <div class="container">
+      <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand mr-auto" href="../index.html">Fitness trgovina</a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto ml-2" id="navbarItems">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Kategorije</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="btn_add_product">Dodajte oglas</a>
+          </li>
+        </ul>
+        <form class="form-inline ml-auto">
+          <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#login_modal"
+            id="btn_main_login">Prijavite
+            se</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!--Product categories-->
+  <h1 class="mb-4">Kategorije proizvoda</h1>
+  <div id="carouselCategories" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselCategories" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselCategories" data-slide-to="1"></li>
+      <li data-target="#carouselCategories" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/protein.jpg" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">Proteini
+                  </h4>
+                  <p class="card-text">Proteinski napitci popularan su način dobivanje više proteina u
+                    svakodnevnoj
+                    prehrani, a
+                    to je važno za sve tvoje fitness ciljeve.</p>
+                  <a href="/pages/products.html?filter=Proteini" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/gainer.jpg" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">Gaineri</h4>
+                  <p class="card-text">Imamo niz dodataka prehrani za upravljanje težinom koji pomažu
+                    u
+                    tvome fitness
+                    putovanju.
+                    Pogledaj naše najbolje suplemente za upravljanje težinom.</p>
+                  <a href="/pages/products.html?filter=Gaineri" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/aminokiseline.png" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">
+                    Aminokiseline</h4>
+                  <p class="card-text">Aminokiseline sadrže super-popularne BCAA, koje se prirodno
+                    pojavljuju u
+                    proteinima, i
+                    tvore gradivni blokovi novog mišića - što je važno bez obzira na tvoje ciljeve.</p>
+                  <a href="/pages/products.html?filter=Aminokiseline"
+                    class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/vitamini2.png" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">Vitamini
+                  </h4>
+                  <p class="card-text">Vitamini i minerali važan su dio tvoje prehrane. Potrebni su za
+                    mnoge važne
+                    funkcije u
+                    tijelu pa je stoga bitno da uneseš preporučenu dnevnu dozu kako bi ostao fit i zdrav.</p>
+                  <a href="/pages/products.html?filter=Vitamini" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/kreatin.jpg" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">Kreatini
+                  </h4>
+                  <p class="card-text">Kreatin je jedan od najpopularnijih i najstraživanijh suplemenata
+                    za koji je
+                    znanstveno
+                    dokazano da povećava fizički performans u uzastopnim vježbama.</p>
+                  <a href="/pages/products.html?filter=Kreatini" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/preworkout1.png" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">Pre workout
+                  </h4>
+                  <p class="card-text">Kako bi vidio najbolje rezultate svoga treninga, prehrana prije
+                    treninga trebala
+                    bi imati
+                    visoki prioritet.</p>
+                  <a href="/pages/products.html?filter=Pre Workout"
+                    class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/oprema.jpg" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">Oprema</h4>
+                  <p class="card-text">Neki od općenito najprodavanijih artikla u segmetnu trening i
+                    fitness nalaze se u
+                    ovoj
+                    kategoriji. Opremite svoj dom ili teretanu sa vrhunskim proizvodima iz naše ponude.</p>
+                  <a href="/pages/products.html?filter=Oprema" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/prehrana.png" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">Prehrana
+                  </h4>
+                  <p class="card-text">Prehrana u bodybildingu se svodi na manipulaciju proteinima,
+                    ugljikohidratima i
+                    mastima.
+                    Ovdje ćemo se bazirati na ishrani za dobivanje mišićne mase.</p>
+                  <a href="/pages/products.html?filter=Prehrana" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-offset-3 col-md mb-5">
+              <div class="card categ h-100">
+                <img src="/img/categories/ostalo.png" class="card-img-top" alt="/pages/product.html">
+                <div class="card-body d-flex flex-column">
+                  <h4 class="card-title text-center">Ostalo</h4>
+                  <p class="card-text">Ostali suplementi i oprema.</p>
+                  <a href="/pages/products.html?filter=Ostalo" class="btn btn-outline-primary mt-auto">Pregledaj</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselCategories" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselCategories" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <script type="module" src="../scripts/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
