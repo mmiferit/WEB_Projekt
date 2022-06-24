@@ -209,36 +209,51 @@ function loadUserProducts() {
 
 function writeProductData(userId, title, description, price, category) {
 
-  var productsRef = ref(database, 'users/' + userId + '/products/');
-  var newProductKey = push(productsRef).key;
-  if (files.length != 0) {
-    for (let i = 0; i < files.length; i++) {
-      var storageRef = refStorage(storage, newProductKey + files[i].name);
-      uploadBytes(storageRef, files[i]).then(() => {
-        getDownloadURL(storageRef).then((downloadURL) => {
-          set(ref(database, 'products/' + newProductKey), {
-            title: title,
-            description: description,
-            price: price,
-            category: category,
-            imageURL: downloadURL,
-            userID: userId
+  var userRef = ref(database);
+  var email = ""
+  var phone = ""
+  get(child(userRef, `users/${userId}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      email = snapshot.child('email').val();
+      phone = snapshot.child('phoneNumber').val();
+      var newProductKey = push(userRef).key;
+      if (files.length != 0) {
+        for (let i = 0; i < files.length; i++) {
+          var storageRef = refStorage(storage, newProductKey + files[i].name);
+          uploadBytes(storageRef, files[i]).then(() => {
+            getDownloadURL(storageRef).then((downloadURL) => {
+              set(ref(database, 'products/' + newProductKey), {
+                title: title,
+                description: description,
+                price: price,
+                category: category,
+                imageURL: downloadURL,
+                userID: userId,
+                phoneNumber: phone,
+                email: email
+              });
+              loadUserProducts()
+            })
           });
-          loadUserProducts()
-        })
-      });
+        }
+      } else {
+        set(ref(database, 'products/' + newProductKey), {
+          title: title,
+          description: description,
+          price: price,
+          category: category,
+          imageURL: "",
+          userID: userId,
+          phoneNumber: phone,
+          email: email
+        });
+        loadUserProducts()
+      }
     }
-  } else {
-    set(ref(database, 'products/' + newProductKey), {
-      title: title,
-      description: description,
-      price: price,
-      category: category,
-      imageURL: "",
-      userID: userId
-    });
-    loadUserProducts()
-  }
+  }).catch((error) => {
+    console.error(error);
+  });
+
 }
 
 //Clear inputs after signing in or registering

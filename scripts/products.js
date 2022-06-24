@@ -32,6 +32,7 @@ window.onload = function () {
     const dbRef = ref(database);
     var products = document.getElementById('products');
     var check = false;
+
     get(child(dbRef, `products/`)).then((snapshot) => {
         snapshot.forEach(function (child) {
             if (snapshot.exists()) {
@@ -46,6 +47,8 @@ window.onload = function () {
                         imageURL = "../img/no-image.jpg";
                     var price = child.child('price').val();
                     var title = child.child('title').val();
+                    var phoneNumber = child.child('phoneNumber').val();
+                    var email = child.child('email').val();
                     var userID = child.child('userId').val();
 
                     var col = document.createElement('div');
@@ -87,12 +90,17 @@ window.onload = function () {
                     btnDetails.innerHTML = "Detalji"
 
                     btnDetails.addEventListener('click', () => {
+
                         $('#details_modal').modal('show');
                         document.getElementById('details_category').innerHTML = category;
                         document.getElementById('details_title').innerHTML = title;
                         document.getElementById('details_description').innerHTML = description;
-                        document.getElementById('details_price').innerHTML = price + ' kn';
+                        document.getElementById('details_price').innerHTML = 'Cijena: ' + price + ' kn';
                         document.getElementById('details_img').src = imageURL;
+                        document.getElementById('details_email').innerHTML = 'E-mail: ' + email;
+                        document.getElementById('details_email').href = 'mailto:' + email;
+                        document.getElementById('details_phone').innerHTML = 'Telefon: ' + phoneNumber;
+                        document.getElementById('details_phone').href = 'tel:' + phoneNumber;
 
                     })
                     cardBody.appendChild(titleh4);
