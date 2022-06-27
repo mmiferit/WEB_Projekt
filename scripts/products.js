@@ -97,9 +97,9 @@ window.onload = function () {
                         document.getElementById('details_description').innerHTML = description;
                         document.getElementById('details_price').innerHTML = 'Cijena: ' + price + ' kn';
                         document.getElementById('details_img').src = imageURL;
-                        document.getElementById('details_email').innerHTML = 'E-mail: ' + email;
+                        document.getElementById('details_email').innerHTML = email;
                         document.getElementById('details_email').href = 'mailto:' + email;
-                        document.getElementById('details_phone').innerHTML = 'Telefon: ' + phoneNumber;
+                        document.getElementById('details_phone').innerHTML = phoneNumber;
                         document.getElementById('details_phone').href = 'tel:' + phoneNumber;
 
                     })
